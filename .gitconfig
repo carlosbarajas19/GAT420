@@ -1,0 +1,10 @@
+[user]
+	name = Carlos Barajas
+	email = cbarajas@student.neumont.edu
+[filter "lfs"]
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+[gui]
+	recentrepo = D:/Git Repository
