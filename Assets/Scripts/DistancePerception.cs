@@ -7,6 +7,7 @@ public class DistancePerception : Perception
     [SerializeField] float radius;
     [SerializeField] float maxAngle;
 
+    
     public override GameObject[] GetGameObjects()
     {
         List<GameObject> result = new List<GameObject>();
@@ -16,10 +17,16 @@ public class DistancePerception : Perception
         {
             if (collider.gameObject == gameObject) continue;
 
-            if (tagName == "" || collider.CompareTag(tagName))
+            
+            if ((tagName == "" || collider.CompareTag(tagName)))
             {
-                result.Add(collider.gameObject);
+                Vector3 direction = (collider.transform.position - transform.position).normalized;
+                float cos = Vector3.Dot(transform.forward, direction);
+
+                float angle = Mathf.Acos(cos) * Mathf.Rad2Deg;
+                if (angle <= maxAngle) result.Add(collider.gameObject);
             }
+
         }
 
         return result.ToArray();
