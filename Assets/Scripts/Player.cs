@@ -5,7 +5,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
 
-    float speed = 5;
+    [Range(1,20)][SerializeField]float speed = 5;
 
     // Start is called before the first frame update
     void Start()
@@ -22,6 +22,6 @@ public class Player : MonoBehaviour
         direction.z = Input.GetAxis("Vertical");
 
         transform.position += direction * speed * Time.deltaTime;
-        transform.position = Utilities.Wrap(transform.position, new Vector3(-10, -10, -10), new Vector3(10, 10, 10));
+        transform.position = Utilities.Wrap(transform.position, new Vector3(-20, -20, -20), new Vector3(20, 20, 20));
     }
 }
