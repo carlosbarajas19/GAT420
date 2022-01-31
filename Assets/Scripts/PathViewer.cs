@@ -5,22 +5,43 @@ using UnityEngine;
 
 public class PathViewer : MonoBehaviour
 {
+	enum SearchType
+	{
+		DFS,
+		BFS,
+		DIJKSTRA,
+		ASTAR
+	}
 	[Range(0, 1500)] public int steps = 0;
 	[SerializeField] GraphNodeSelector nodeSelector;
-
-	public bool visible { get; set; } = true;
+	[SerializeField] SearchType searchType;
+	[SerializeField] bool visible = true;
+	[SerializeField] [TextArea] string info;
 
 	int prevSteps;
 	bool found = false;
 	List<GraphNode> path = new List<GraphNode>();
 
+	Search.SearchAlgorithm[] searchAlgorithms = { Search.DFS, Search.BFS, null, null };
+	Search.SearchAlgorithm searchAlgorithm;
+	SearchType prevSearchType;
+
 	private void Start()
 	{
+		searchAlgorithm = searchAlgorithms[(int)searchType];
 		prevSteps = steps;
+		prevSearchType = searchType;
 	}
 
 	private void Update()
 	{
+		if (searchType != prevSearchType)
+		{
+			searchAlgorithm = searchAlgorithms[(int)searchType];
+			BuildPath();
+		}
+		prevSearchType = searchType;
+
 		// build path
 		steps = Mathf.Clamp(steps, 0, 500);
 		if (steps != prevSteps)
@@ -29,14 +50,15 @@ public class PathViewer : MonoBehaviour
 		}
 		prevSteps = steps;
 
-		if (visible)
+		var nodes = Node.GetNodes<GraphNode>();
+		nodes.ToList().ForEach(node => node.GetComponent<Renderer>().enabled = visible);
+
+		if (visible)	
 		{
-			// show node connections
-			var nodes = Node.GetNodes<GraphNode>();
-			nodes.ToList().ForEach(node => node.edges.ForEach(edge => Debug.DrawLine(edge.nodeA.transform.position, edge.nodeB.transform.position)));
+			nodes.ToList().ForEach(node => node.neighbors.ForEach(neighbor => Debug.DrawLine(node.transform.position, neighbor.transform.position)));
 
 			// reset graph nodes color
-			nodes.ToList().ForEach(node => node.GetComponent<Renderer>().material.color = Color.white);
+			nodes.ToList().ForEach(node => node.GetComponent<Renderer>().material.color = node.visited ? Color.black : Color.white);
 
 			// set all path nodes color
 			Color color = (found) ? Color.yellow : Color.magenta;
@@ -50,7 +72,7 @@ public class PathViewer : MonoBehaviour
 		GraphNode.ResetNodes();
 
 		// build path
-		found = Search.BuildPath(Search.DFS, nodeSelector.sourceNode, nodeSelector.destinationNode, ref path, steps);
+		found = Search.BuildPath(searchAlgorithm, nodeSelector.sourceNode, nodeSelector.destinationNode, ref path, steps);
 	}
 
 	public void ShowNodes()

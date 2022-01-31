@@ -14,9 +14,9 @@ public class PathViewerEditor : Editor
 		PathViewer viewer = (PathViewer)target;
 
 		if (GUILayout.Button("Build Path")) viewer.BuildPath();
-		if (GUILayout.Button(">>")) viewer.steps++;
+		/*if (GUILayout.Button(">>")) viewer.steps++;
 		if (GUILayout.Button("<<")) viewer.steps--;
 		if (GUILayout.Button("Show")) viewer.ShowNodes();
-		if (GUILayout.Button("Hide")) viewer.HideNodes();
+		if (GUILayout.Button("Hide")) viewer.HideNodes();*/
 	}
 }
