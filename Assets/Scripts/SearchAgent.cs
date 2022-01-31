@@ -22,9 +22,9 @@ public class SearchAgent : Agent
 
     void Update()
     {
-        Debug.DrawLine(transform.position, sourceNode.transform.position, Color.green);
+        /*Debug.DrawLine(transform.position, sourceNode.transform.position, Color.green);
         Debug.DrawLine(transform.position, destinationNode.transform.position, Color.red);
-        Debug.DrawLine(transform.position + Vector3.up, targetNode.transform.position + Vector3.up, Color.yellow);
+        Debug.DrawLine(transform.position + Vector3.up, targetNode.transform.position + Vector3.up, Color.yellow);*/
         if (targetNode != null)
         {
             movement.MoveTowards(targetNode.transform.position);
@@ -56,6 +56,6 @@ public class SearchAgent : Agent
     private void GeneratePath()
     {
         GraphNode.ResetNodes();
-        Search.BuildPath(Search.DFS, sourceNode, destinationNode, ref path);
+        Search.BuildPath(Search.AStar, sourceNode, destinationNode, ref path);
     }
 }
