@@ -6,13 +6,15 @@ using UnityEngine.AI;
 [RequireComponent(typeof(NavMeshAgent))]
 public class NavMeshMovemnt : Movement
 {
+    
+
     public override Vector3 velocity { get => navMeshAgent.velocity; set => navMeshAgent.velocity = value; }
     /*public override Vector3()
     {
 
     }*/
 
-    NavMeshAgent navMeshAgent;
+    public NavMeshAgent navMeshAgent;
 
     private void Start()
     {

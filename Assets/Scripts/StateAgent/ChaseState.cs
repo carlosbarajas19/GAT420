@@ -9,19 +9,19 @@ public class ChaseState : State
     public override void onEnter()
     {
         Debug.Log(name + " enter");
-        //owner.movement.Resume();
+        owner.movement.Resume();
     }
 
     public override void onExit()
     {
-        Debug.Log(name + " exit");
+        //Debug.Log(name + " exit");
     }
 
     public override void onUpdate()
     {
-        
-        owner.movement.MoveTowards(owner.enemy.transform.position);
-        Debug.Log(name + " update");
+        if(owner.enemy) owner.movement.MoveTowards(owner.enemy.transform.position);
+
+        //Debug.Log(name + " update");
     }
 
 }

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3917455951606248135}
   - component: {fileID: 7894804712197842187}
   - component: {fileID: 7404980854308164228}
-  - component: {fileID: -1908071043662726355}
+  - component: {fileID: 1883001588120732876}
   - component: {fileID: 1762922656518840118}
   - component: {fileID: 3917455951606248186}
   - component: {fileID: 3917455951606248187}
@@ -56,9 +56,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movement: {fileID: 7404980854308164228}
   animator: {fileID: 276054231424410056}
-  perception: {fileID: -1908071043662726355}
+  perception: {fileID: 0}
   pathFollower: {fileID: 1762922656518840118}
   enemySeen:
+    value: 0
+  enemyDistance:
     value: 0
   health:
     value: 0
@@ -77,7 +79,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementData: {fileID: 11400000, guid: a18c2589b7965084daf007c3aa57c3cb, type: 2}
---- !u!114 &-1908071043662726355
+--- !u!114 &1883001588120732876
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -86,14 +88,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 3917455951606248189}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 91f0f75669547954aa14310fffeee005, type: 3}
+  m_Script: {fileID: 11500000, guid: 9808d04151d5c48419143a95f5958a0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   tagName: Player
-  raycastTransform: {fileID: 8846511902307629271}
   distance: 10
   angle: 90
+  raycastTransform: {fileID: 8846511902307629271}
   numRaycast: 20
+  radius: 2
 --- !u!114 &1762922656518840118
 MonoBehaviour:
   m_ObjectHideFlags: 0

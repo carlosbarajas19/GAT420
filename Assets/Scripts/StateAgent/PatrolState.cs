@@ -13,12 +13,12 @@ public class PatrolState : State
 
     public override void onExit()
     {
-        Debug.Log(name + " exit");
+        //Debug.Log(name + " exit");
     }
 
     public override void onUpdate()
     {
-        Debug.Log(name + " update");
+        //Debug.Log(name + " update");
     }
 
     // Start is called before the first frame update

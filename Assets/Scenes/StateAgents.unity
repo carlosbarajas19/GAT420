@@ -227,7 +227,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5124563}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5, y: 1, z: 0}
+  m_LocalPosition: {x: -5, y: 1, z: -4.53}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1391,6 +1391,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pathNodes: {fileID: 0}
+--- !u!114 &1195948169 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1883001588120732876, guid: 2e98f8de613c951479d67153176f0cd9, type: 3}
+  m_PrefabInstance: {fileID: 674933836541097329}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1195948161}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9808d04151d5c48419143a95f5958a0a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1195948171
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1404,9 +1415,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tagName: 
-  raycastTransform: {fileID: 1436011908}
   distance: 3
   angle: 0
+  raycastTransform: {fileID: 1436011908}
   numRaycast: 2
 --- !u!4 &1283724846 stripped
 Transform:
@@ -2484,6 +2495,10 @@ PrefabInstance:
       propertyPath: m_ApplyRootMotion
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1883001588120732876, guid: 2e98f8de613c951479d67153176f0cd9, type: 3}
+      propertyPath: radius
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 3917455951606248135, guid: 2e98f8de613c951479d67153176f0cd9, type: 3}
       propertyPath: m_RootOrder
       value: 7
@@ -2540,6 +2555,18 @@ PrefabInstance:
       propertyPath: animator
       value: 
       objectReference: {fileID: 46425242}
+    - target: {fileID: 7894804712197842187, guid: 2e98f8de613c951479d67153176f0cd9, type: 3}
+      propertyPath: perception
+      value: 
+      objectReference: {fileID: 1195948169}
+    - target: {fileID: 7894804712197842187, guid: 2e98f8de613c951479d67153176f0cd9, type: 3}
+      propertyPath: timer.value
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7894804712197842187, guid: 2e98f8de613c951479d67153176f0cd9, type: 3}
+      propertyPath: health.value
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 7894804712197842187, guid: 2e98f8de613c951479d67153176f0cd9, type: 3}
       propertyPath: pathFollower
       value: 

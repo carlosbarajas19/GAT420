@@ -8,8 +8,8 @@ public class IdleState : State
 
     public override void onEnter()
     {
-        Debug.Log(name + " enter");
-        //owner.movement.Stop();
+        //Debug.Log(name + " enter");
+        owner.movement.Stop();
         owner.timer.value = 2;
     }
 
@@ -20,7 +20,7 @@ public class IdleState : State
 
     public override void onUpdate()
     {
-        Debug.Log(name + " update");
+        //Debug.Log(name + " update");
     }
 
     // Start is called before the first frame update
