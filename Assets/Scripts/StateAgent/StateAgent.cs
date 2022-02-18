@@ -12,6 +12,7 @@ public class StateAgent : Agent
     public BoolRef enemySeen;
     public FloatRef enemyDistance;
     public FloatRef health;
+    public FloatRef damage;
     public FloatRef timer;
 
     public GameObject enemy { get; set; }
@@ -39,8 +40,10 @@ public class StateAgent : Agent
 
         stateMachine.AddTransition(typeof(AttackState).Name, new Transition(new Condition[] { new FloatCondition(timer, Condition.Predicate.LESS_EQUAL, 0) }), typeof(ChaseState).Name);
         stateMachine.AddTransition(typeof(AttackState).Name, new Transition(new Condition[] { new FloatCondition(health, Condition.Predicate.LESS_EQUAL, 30) }), typeof(EvadeState).Name);
+        stateMachine.AddTransition(typeof(AttackState).Name, new Transition(new Condition[] { new FloatCondition(health, Condition.Predicate.LESS_EQUAL, 0) }), typeof(DeathState).Name);
 
         stateMachine.AddTransition(typeof(EvadeState).Name, new Transition(new Condition[] { new BoolCondition(enemySeen, false) }), typeof(IdleState).Name);
+        stateMachine.AddTransition(typeof(EvadeState).Name, new Transition(new Condition[] { new FloatCondition(health, Condition.Predicate.LESS_EQUAL, 0) }), typeof(DeathState).Name);
 
         stateMachine.SetState(stateMachine.StateFromName(typeof(IdleState).Name));
 
@@ -58,8 +61,12 @@ public class StateAgent : Agent
 
 
         stateMachine.Update();
-        if(Input.GetKeyDown(KeyCode.Space)) stateMachine.SetState(stateMachine.StateFromName("idle"));
 
         animator.SetFloat("Speed", movement.velocity.magnitude);
+    }
+
+    private void OnGUI()
+    {
+        GUI.Label(new Rect(10, 10, 300, 20), stateMachine.GetStateName());
     }
 }

@@ -8,28 +8,26 @@ public class PatrolState : State
 
     public override void onEnter()
     {
+        owner.pathFollower.targetNode = owner.pathFollower.pathNodes.GetNearestNode(owner.transform.position);
+        owner.movement.Resume();
         Debug.Log(name + " enter");
     }
 
     public override void onExit()
     {
-        //Debug.Log(name + " exit");
+        Debug.Log(name + " exit");
+        owner.movement.Stop();
     }
 
     public override void onUpdate()
     {
-        //Debug.Log(name + " update");
-    }
+        Debug.Log(name + " update");
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+        owner.pathFollower.Move(owner.movement);
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            owner.stateMachine.SetState(owner.stateMachine.StateFromName(typeof(IdleState).Name));
+        }
     }
 }
