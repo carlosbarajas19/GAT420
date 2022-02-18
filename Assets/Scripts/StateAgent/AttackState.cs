@@ -9,6 +9,12 @@ public class AttackState : State
     public override void onEnter()
     {
         Debug.Log(name + " enter");
+
+        if(owner.enemy.TryGetComponent<StateAgent>(out StateAgent stateAgent))
+        {
+            stateAgent.health.value -= owner.damage.value;
+        }
+
         owner.movement.Stop();
         owner.animator.SetTrigger("Attack");
         owner.timer.value = 1;

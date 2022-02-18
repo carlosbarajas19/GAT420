@@ -8,7 +8,7 @@ public class IdleState : State
 
     public override void onEnter()
     {
-        //Debug.Log(name + " enter");
+        Debug.Log(name + " enter");
         owner.movement.Stop();
         owner.timer.value = 2;
     }
@@ -20,18 +20,12 @@ public class IdleState : State
 
     public override void onUpdate()
     {
-        //Debug.Log(name + " update");
-    }
+        Debug.Log(name + " update");
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        owner.timer.value -= Time.deltaTime;
+        if(owner.timer.value <= 0)
+        {
+            owner.stateMachine.SetState(owner.stateMachine.StateFromName(typeof(PatrolState).Name));
+        }
     }
 }

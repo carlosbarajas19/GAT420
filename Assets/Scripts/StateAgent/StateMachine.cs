@@ -31,6 +31,7 @@ public class StateMachine
 
     public void SetState(State newState)
     {
+        if (newState == null || newState == currentState) return;
         currentState?.onExit();
         currentState = newState;
         newState.onEnter();
