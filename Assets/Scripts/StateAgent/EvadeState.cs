@@ -15,10 +15,10 @@ public class EvadeState : State
         distance = owner.perception.distance;
 
         owner.perception.angle = 180;
-        owner.perception.distance = 10;
+        owner.perception.distance = 15;
         if(owner.TryGetComponent<SphereCastPerception>(out SphereCastPerception perception))
         {
-            perception.numRaycast = 40;
+            perception.numRaycast *= 2;
         }
         owner.movement.Resume();
     }
@@ -27,7 +27,7 @@ public class EvadeState : State
     {
         if (owner.TryGetComponent<SphereCastPerception>(out SphereCastPerception perception))
         {
-            perception.numRaycast = 20;
+            perception.numRaycast /= 2;
         }
         owner.perception.angle = angle;
         owner.perception.distance = distance;

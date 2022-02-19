@@ -9,6 +9,7 @@ TagManager:
   - WaypointAgent
   - Soldier
   - Mouse
+  - Agent2
   layers:
   - Default
   - TransparentFX

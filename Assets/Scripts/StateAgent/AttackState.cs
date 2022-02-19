@@ -10,14 +10,11 @@ public class AttackState : State
     {
         Debug.Log(name + " enter");
 
-        if(owner.enemy.TryGetComponent<StateAgent>(out StateAgent stateAgent))
-        {
-            stateAgent.health.value -= owner.damage.value;
-        }
-
         owner.movement.Stop();
         owner.animator.SetTrigger("Attack");
         owner.timer.value = 1;
+
+        owner.GetComponent<AgentDamage>().Damage();
     }
 
     public override void onExit()

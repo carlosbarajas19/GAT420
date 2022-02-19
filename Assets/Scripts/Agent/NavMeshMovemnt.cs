@@ -16,10 +16,17 @@ public class NavMeshMovemnt : Movement
 
     public NavMeshAgent navMeshAgent;
 
-    private void Start()
+    void Start()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
     }
+
+    public override Vector3 destination
+    {
+        get => navMeshAgent.destination;
+        set => navMeshAgent.destination = value;
+    }
+
 
     private void Update()
     {
