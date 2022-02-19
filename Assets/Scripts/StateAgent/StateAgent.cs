@@ -58,7 +58,12 @@ public class StateAgent : Agent
 
     void Update()
     {
-
+        /*if(transform.position.y != 1)
+        {
+            Vector3 tempVec = transform.position;
+            tempVec.y = 1;
+            transform.position = tempVec;
+        }*/
         //enemy
         var enemies = perception.GetGameObjects();
         enemySeen.value = (enemies.Length != 0);
