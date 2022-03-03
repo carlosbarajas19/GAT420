@@ -1101,7 +1101,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pathNodes: {fileID: 0}
-  pathName: PatrolPath2
+  pathName: PatrolPath1
 --- !u!114 &3166120893462415081
 MonoBehaviour:
   m_ObjectHideFlags: 0
