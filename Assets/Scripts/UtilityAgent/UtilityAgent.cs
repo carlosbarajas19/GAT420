@@ -7,8 +7,9 @@ public class UtilityAgent : Agent
 {
     [SerializeField] Perception perception;
     [SerializeField] MeterUI meter;
+    [SerializeField] float objectCooldown = 10;
 
-    const float MIN_SCORE = 0.1f;
+    const float MIN_SCORE = 0.2f;
 
     Need[] needs;
     UtilityObject activeUtilityObject = null;
@@ -52,7 +53,7 @@ public class UtilityAgent : Agent
                 {
                     utilityObject.visible = true;
                     utilityObject.score = GetUtilityObjectScore(utilityObject);
-                    if(utilityObject.score > MIN_SCORE) utilityObjects.Add(utilityObject);
+                    if (utilityObject.score > MIN_SCORE && utilityObject.cooldown == 0) utilityObjects.Add(utilityObject);
                 }
             }
 
@@ -91,7 +92,12 @@ public class UtilityAgent : Agent
         yield return new WaitForSeconds(utilityObject.duration);
 
         //stop effect
-        if (utilityObject.effect != null) utilityObject.effect.SetActive(false);
+        if (utilityObject.effect != null)
+        {
+            utilityObject.effect.SetActive(false);
+            utilityObject.cooldown = objectCooldown;
+        }
+        
         print("stop effect");
 
         //apply
@@ -113,6 +119,7 @@ public class UtilityAgent : Agent
                 need.input = Mathf.Clamp(need.input, -1, 1);
             }
         }
+
     }
 
     float GetUtilityObjectScore(UtilityObject utilityObject)
@@ -134,6 +141,52 @@ public class UtilityAgent : Agent
     {
         return needs.First(need => need.type == type);
     }
+
+    UtilityObject GetHighestUtilityObject(UtilityObject[] utilityObjects)
+    {
+        UtilityObject highestUtilityObject = null;
+        float highestScore = MIN_SCORE;
+        foreach (var utilityObject in utilityObjects)
+        {
+            var score = utilityObject.score;// get the score of the utility object
+            if (score > highestScore)// if score > highest score then set new highest score and highest utility object
+            {
+                highestScore = score;
+                highestUtilityObject = utilityObject;
+            }
+        }
+
+        return highestUtilityObject;
+    }
+
+    UtilityObject GetRandomUtilityObject(UtilityObject[] utilityObjects)
+    {
+        // evaluate all utility objects
+        float[] scores = new float[utilityObjects.Length];
+        float totalScore = 0;
+        for (int i = 0; i < utilityObjects.Length; i++)
+        {
+            var score = utilityObjects[i].score; // <get the score of the utility objects[i]>
+            scores[i] = score; // <set the scores[i] to the score>
+            totalScore += score; // <add score to total score>
+        }
+
+        // select random utility object based on score
+        // the higher the score the greater the chance of being randomly selected
+
+        float random = Random.Range(0, totalScore);// <float random = value between 0 and totalScore>
+        for (int i = 0; i < scores.Length; i++)
+        {
+            // <check if random value is less than scores[i]>
+            if (random < scores[i]) return utilityObjects[i]; // <return utilityObjects[i] if less than>
+            random -= scores[i]; // <subtract scores[i] from random value>
+        }
+
+        return null;
+    }
+
+
+
     /*private void OnGUI()
     {
         Vector2 screen = Camera.main.WorldToScreenPoint(transform.position);

@@ -25,7 +25,7 @@ public class UtilityObject : MonoBehaviour
     public bool visible { get; set; }
     
     MeterUI meter;
-
+    public float cooldown { get; set; }
     void Start()
     {
         meter = Instantiate(meterPrefab, GameObject.Find("Canvas").transform);
@@ -39,6 +39,8 @@ public class UtilityObject : MonoBehaviour
 
     private void LateUpdate()
     {
+        cooldown -= Time.deltaTime;
+        if (cooldown < 0) cooldown = 0;
         meter.gameObject.SetActive(visible);
         meter.worldPosition = transform.position + Vector3.up * 3;
         meter.slider.value = score;
